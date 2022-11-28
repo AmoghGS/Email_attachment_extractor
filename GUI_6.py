@@ -114,7 +114,7 @@ canvas = tk.Canvas(
     window, bg="#333333", height=window.winfo_screenheight(), width=window.winfo_screenwidth(),
     bd=0, highlightthickness=0, relief="ridge")
 canvas.place(x=0, y=0)
-canvas.create_rectangle(431, 0, window.winfo_screenwidth(
+canvas.create_rectangle(300, 0, window.winfo_screenwidth(
 ), window.winfo_screenheight(), fill="#214E67", outline="")
 
 
@@ -227,7 +227,7 @@ def change_to_login_detail_page():
     login_detail_page, bg="#333333", height=window.winfo_screenheight(), width=window.winfo_screenwidth(),
     bd=0, highlightthickness=0, relief="ridge")
     canvas3.place(x=0, y=0)
-    canvas3.create_rectangle(431, 0, 431 + window.winfo_screenwidth(),
+    canvas3.create_rectangle(300, 0, 300 + window.winfo_screenwidth(),
                              window.winfo_screenheight(), fill="#214E67", outline="")
 
     path_back_btn = tk.Button(login_detail_page,
@@ -376,7 +376,7 @@ canvas3 = tk.Canvas(
     login_detail_page, bg="#333333", height=window.winfo_screenheight(), width=window.winfo_screenwidth(),
     bd=0, highlightthickness=0, relief="ridge")
 canvas3.place(x=0, y=0)
-canvas3.create_rectangle(431, 0, 431 + window.winfo_screenwidth(),
+canvas3.create_rectangle(300, 0, 300 + window.winfo_screenwidth(),
                          window.winfo_screenheight(), fill="#214E67", outline="")
 
 path_back_btn = tk.Button(login_detail_page,
@@ -395,7 +395,7 @@ canvas1 = tk.Canvas(
     filter_page, bg="#333333", height=window.winfo_screenheight(), width=window.winfo_screenwidth(),
     bd=0, highlightthickness=0, relief="ridge")
 canvas1.place(x=0, y=0)
-canvas1.create_rectangle(431, 0, 431 + window.winfo_screenwidth(),
+canvas1.create_rectangle(300, 0, 300 + window.winfo_screenwidth(),
                          window.winfo_screenheight(), fill="#214E67", outline="")
 
 login_detail_btn = tk.Button(filter_page,
@@ -430,61 +430,63 @@ label1 = tk.Label(filter_page,
                   text="Select the type of attachments : ", bg="#214E67", fg="#000716",
                   font=("Times New Roman", 13)
                   )
-label1.place(x=440, y=50)
+label1.place(x=340, y=50)
+
+
 label7 = tk.Label(filter_page,
                   text="Select Reciever email ID : ", bg="#214E67", fg="#000716",
                   font=("Times New Roman", 13)
                   )
-label7.place(x=670, y=50)
+label7.place(x=650, y=50)
 
 
 label2 = tk.Label(filter_page,
                   text="Select the Time Interval : ", bg="#214E67", fg="#000716",
                   font=("Times New Roman", 13)
                   )
-label2.place(x=460, y=230)
+label2.place(x=340, y=240)
 
 
 label3 = tk.Label(filter_page,
                   text="Start Date : ", bg="#214E67", fg="#000716",
                   font=("Times New Roman", 10)
                   )
-label3.place(x=460, y=260)
+label3.place(x=360, y=260)
 
 cal1_data = StringVar()
 cal2_data = StringVar()
 
 cal1 = DateEntry(filter_page, width=16, background="black",
                 foreground="white", bd=2, textvariable = cal1_data)
-cal1.place(x=460.0, y=280, width=100.0, height=20)
+cal1.place(x=360.0, y=280, width=100.0, height=20)
 
 label4 = tk.Label(filter_page,
                   text="End Date : ", bg="#214E67", fg="#000716",
                   font=("Times New Roman", 10)
                   )
-label4.place(x=580, y=260)
+label4.place(x=480, y=260)
 today  = date.today()
 cal2 = DateEntry(filter_page, width=16, background="black",maxdate = today,
                 foreground="white", bd=2, textvariable = cal2_data)
-cal2.place(x=580.0, y=280, width=100.0, height=20)
+cal2.place(x=480.0, y=280, width=100.0, height=20)
 
 label5 = tk.Label(filter_page,
                   text="Sender Mail ID : ", bg="#214E67", fg="#000716",
                   font=("Times New Roman", 13)
                   )
-label5.place(x=460, y=320)
+label5.place(x=360, y=320)
 sender_email_entry = tk.Entry(
     filter_page, bd=0, bg="white", fg="#000716",  highlightthickness=0)
-sender_email_entry.place(x=460, y=348, width=200, height=20)
+sender_email_entry.place(x=360, y=348, width=200, height=20)
 
 label6 = tk.Label(filter_page,
                   text="Subject : ", bg="#214E67", fg="#000716",
                   font=("Times New Roman", 13)
                   )
-label6.place(x=460, y=378)
+label6.place(x=360, y=378)
 subject_entry = tk.Entry(
     filter_page, bd=0, bg="white", fg="#000716",  highlightthickness=0)
-subject_entry.place(x=460, y=410, width=200, height=20)
+subject_entry.place(x=360, y=410, width=200, height=20)
 
 Button1 = Checkbutton(filter_page, text="PDF",
                       
@@ -527,11 +529,11 @@ Button5 = Checkbutton(filter_page, text="All",
                       offvalue='')   
 
 Checkbutton5.set('all')             
-Button1.place(x=470, y=90)
-Button2.place(x=470, y=120)
-Button3.place(x=470, y=150)
-Button4.place(x=470, y=180)
-Button5.place(x=470, y=210)
+Button1.place(x=370, y=90)
+Button2.place(x=370, y=120)
+Button3.place(x=370, y=150)
+Button4.place(x=370, y=180)
+Button5.place(x=370, y=210)
 
 
 # back_btn = tk.Button(filter_page,
@@ -585,9 +587,12 @@ def download():
     global emails
     global filters
     global var
+    if path_entry.get()=='':
+        tk.messagebox.showerror(title="Select a valid path!", message="Select a valid path")
+        return
+    print("Path_",path_entry.get())
     print('Here')
     # emails = attachment_extractor.get_attachment_count(filters)
-    print(path_entry.get())
     # x = threading.Thread(target=attachment_extractor.get_attachments, args=(emails,[Checkbutton1.get(),Checkbutton2.get(),Checkbutton3.get(),Checkbutton4.get(), Checkbutton5.get()],path_entry.get()), daemon=True)
     # x.start()
     location_filter = ''
@@ -610,7 +615,7 @@ def close():
 apply_filter_btn = tk.Button(filter_page,
                              text='Apply Filter', bg="#333333",fg="white", borderwidth=0, highlightthickness=0,
                              command=apply_filter, relief="groove")
-apply_filter_btn.place(x=570, y=450, width=70, height=30)
+apply_filter_btn.place(x=470, y=450, width=70, height=30)
 
 window.protocol('WM_DELETE_WINDOW',close)
 
@@ -619,7 +624,7 @@ canvas2 = tk.Canvas(
     path_page, bg="#333333", height=window.winfo_screenheight(), width=window.winfo_screenwidth(),
     bd=0, highlightthickness=0, relief="ridge")
 canvas2.place(x=0, y=0)
-canvas2.create_rectangle(431, 0, 431 + window.winfo_screenwidth(),
+canvas2.create_rectangle(300, 0, 300 + window.winfo_screenwidth(),
                          window.winfo_screenheight(), fill="#214E67", outline="")
 
 title = tk.Label(path_page,
@@ -672,7 +677,7 @@ R4.place(x=490.0, y=160)
 
 path_entry = tk.Entry(path_page, bd=0, bg="#F6F7F9",
                       fg="#000716", highlightthickness=0)
-path_entry.place(x=490.0, y=299+25, width=321.0, height=35)
+path_entry.place(x=450.0, y=299+25, width=321.0, height=35)
 path_picker_img = tk.PhotoImage(file=ASSETS_PATH / "path_picker.png")
 path_picker_button = tk.Button(
     path_page,
@@ -685,7 +690,7 @@ path_picker_button = tk.Button(
     command=select_path,
     relief='flat')
 path_picker_button.place(
-    x=783, y=327,
+    x=743, y=327,
     width=24,
     height=22)
 
@@ -704,7 +709,7 @@ path_Download_btn = tk.Button(path_page,
 path_Download_btn.place(x=600, y=401, width=70, height=30)
 
 canvas2.create_text(
-    490.0, 308.5, text="Specify the destination folder :",
+    450.0, 308.5, text="Specify the destination folder :",
     fill="black", font=("Arial-BoldMT", int(13.0)), anchor="w")
 
 if(attachment_extractor.already_logged_in()):
