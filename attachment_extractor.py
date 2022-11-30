@@ -19,6 +19,9 @@ mail_password = {}
 imap_servers = {}
 connections = {}
 threads = []
+logfile = 'C:/Users/Dell/Desktop/Email_attachment_extractor/logfile.txt'
+with open(logfile,'w') as f:
+    pass
 # socket.setdefaulttimeout(15)
 
 #wpfxmopnmzxmxlqu
@@ -122,7 +125,7 @@ def display_messages(username, filters):
     else:
         return []
 
-def get_attachments(filters, location, location_filter):
+def get_attachments(filters, location, location_filter,thread_no):
     connection = []
     user_email = {}
     users = []
@@ -172,8 +175,11 @@ def get_attachments(filters, location, location_filter):
         else:
             status, data = i.search(None, f'Since "{start_date}"', f'Sentbefore "{end_date}"')
         vals = data[0].decode().split()
-        set_final1 = set_final1.intersection(vals)
-        print(set_final1)
+        if set_final1:
+            set_final1 = set_final1.intersection(vals)
+        else:
+            set_final1 = set(vals)
+        print('before download',set_final1)
         user_email[users[index]] = set_final1
         for user in user_email:
             set_of_mails = user_email[user]
@@ -203,6 +209,10 @@ def get_attachments(filters, location, location_filter):
                                 print(attchFilePath)
                                 with open(attchFilePath, "wb") as f:
                                     f.write(part.get_payload(decode=True))
+                                with open(logfile,'a') as f:
+                                    f.write('\n'+str(thread_no)+','+attchFilePath)
+    with open(logfile,'a') as f:
+        f.write('\n'+str(thread_no)+','+'Download_complete')
     return user_email
 
 
@@ -213,7 +223,7 @@ def download(filters, location, location_filter):
                 threads.remove(i)        
     if len(threads) == 3:
         return "Wait for other downloads to complete!"
-    x = threading.Thread(target=get_attachments, args=(filters, location, location_filter), daemon=True)
+    x = threading.Thread(target=get_attachments, args=(filters, location, location_filter, len(threads)+1), daemon=True)
     threads.append(x)
     print('Here 1')
     x.start()
