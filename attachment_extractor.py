@@ -161,7 +161,10 @@ def get_attachments(filters, location, location_filter,thread_no):
                     vals = data[0].decode().split()
                     set_of_mails = set_of_mails.union(vals)
                 set_final2 = set_final2.union(set_of_mails)
-            set_final1 = set_final1.intersection(set_final2)
+            if set_final1:
+                set_final1 = set_final1.intersection(set_final2)
+            else:
+                set_final1 = set_final1.union(set_final2)
         #set_final1 = apply_other_filters(i,set_final1,filters)
 
         d = {'1':'Jan','2':'Feb','3':'Mar','4':'Apr','5':'May','6':'Jun', '7':'Jul', '8':'Aug', '9':'Sep', '10':'Oct', '11':'Nov', '12':'Dec'}
